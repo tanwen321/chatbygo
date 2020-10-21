@@ -9,8 +9,11 @@ linux go环境或者mac go环境
 websocket：https://github.com/gorilla/websocket
 
 ### 3、运行步骤
-[@tanwendeMacBook-Air:G_work]$ cd chatbygo/
-[@tanwendeMacBook-Air:chatbygo]$ ./install
-finished
-[@tanwendeMacBook-Air:chatbygo]$ ./bin/test
+[@tanwendeMacBook-Air:G_work]$ cd chatbygo/ 
+
+[@tanwendeMacBook-Air:chatbygo]$ ./install 
+
+finished 
+
+[@tanwendeMacBook-Air:chatbygo]$ ./bin/test 
 
