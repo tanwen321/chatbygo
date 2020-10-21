@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+if [ ! -f install ]; then
+echo 'install must be run within its container folder' 1>&2
+exit 1
+fi
+
+CURDIR=`pwd`
+OS=`uname -s`
+if [[ "$OS" == "Linux" ]];then
+	sed -i "s%Whome *=.*$%Whome = \"$CURDIR/priv\"%" src/gchat/gchat_db.go
+fi
+if [[ "$OS" == "Darwin" ]];then
+	sed -i "" "s%Whome *=.*$%Whome = \"$CURDIR/priv\"%" src/gchat/gchat_db.go
+fi
+OLDGOPATH="$GOPATH"
+export GOPATH="$CURDIR"	
+
+gofmt -w src
+
+go install test
+
+export GOPATH="$OLDGOPATH"
+
+echo 'finished'
