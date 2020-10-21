@@ -6,7 +6,13 @@ exit 1
 fi
 
 CURDIR=`pwd`
-sed -i "s%Whome *=.*$%Whome = \"$CURDIR/priv\"%p" ./src/gchat/gchat_db.go
+OS=`uname -s`
+if [[ "$OS" == "Linux" ]];then
+	sed -i "s%Whome *=.*$%Whome = \"$CURDIR/priv\"%" src/gchat/gchat_db.go
+fi
+if [[ "$OS" == "Darwin" ]];then
+	sed -i "" "s%Whome *=.*$%Whome = \"$CURDIR/priv\"%" src/gchat/gchat_db.go
+fi
 OLDGOPATH="$GOPATH"
 export GOPATH="$CURDIR"	
 
