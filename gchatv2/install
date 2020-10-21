@@ -6,6 +6,7 @@ exit 1
 fi
 
 CURDIR=`pwd`
+sed -i "s%Whome *=.*$%Whome = \"$CURDIR/priv\"%p" ./src/gchat/gchat_db.go
 OLDGOPATH="$GOPATH"
 export GOPATH="$CURDIR"	
 
