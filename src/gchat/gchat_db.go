@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	Whome    = "/Users/tanwen/Desktop/G_work/chatbygo/gchatv2/priv"
+	Whome    = "/Users/tanwen/Desktop/G_work/chatbygo/priv"
 	uini     = Whome + "/../data/udb.ini"
 	gini     = Whome + "/../data/gdb.ini"
 	Time_out = 60

@@ -207,6 +207,10 @@ function renderGroupList(groups) {
         }
         //设置群id
         item.attr("id", key);
+        //设置群头像
+        // var groupAvatarImg = item.find("img");
+        // groupAvatarImg.attr("src", group.avatar);
+        // groupAvatarImg.attr("id", "avatar_" + key);
         //设置群名称
         item.find(".group-name").html(group.name);
         //更新未读消息数
@@ -556,7 +560,7 @@ function createWebSocket(url) {
         initEventHandle();
     } catch (e) {
         //x]alert("line98");
-        reconnect(url);+
+        reconnect(url);
         console.log(e);
     }
 }
@@ -622,29 +626,20 @@ function handMsg(edata){
     if(edata != "pong"){
         var buf=JSON.parse(edata);
         if(buf.init == undefined){
-            if(buf.fe == undefined){
-                if(buf.type == Msgtype.firtype){
-                    onNewPrivateMessageReceive(buf)
-                }
-                else if (buf.type == Msgtype.grptype){
-                    onNewGroupMessageReceive(buf)
-                }
-                else if (buf.type == Msgtype.ontype){
-                    onFriendonline(buf)
-                }
-                else if (buf.type == Msgtype.offtype){
-                    onFriendoffline(buf)
-                }
-                else{
-                    $(mid).innerHTML += '<div class="clearfloat"><div class="author-name"></div><div class="left"><div class="chat-avatars"><img src="'+ buf.fi +'" alt="头像"/></div><div class="chat-message"><img src="'+ buf.da +'" alt=""></div></div></div>';
-                    set_scroll();
-                }                
+            if(buf.type == Msgtype.firtype){
+                onNewPrivateMessageReceive(buf)
             }
-            else{
-                return_list();
-                var fep = "per_" + buf.fe;
-                $(fep).style.display='none';
+            else if (buf.type == Msgtype.grptype){
+                onNewGroupMessageReceive(buf)
             }
+            else if (buf.type == Msgtype.ontype){
+                onFriendonline(buf)
+            }
+            else if (buf.type == Msgtype.offtype){
+                onFriendoffline(buf)
+            }
+            else {
+            }                
         }
         else{
             chatService = buf.init
