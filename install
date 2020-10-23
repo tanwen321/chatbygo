@@ -18,6 +18,7 @@ export GOPATH="$CURDIR"
 
 gofmt -w src
 
+#go install -race test
 go install test
 
 export GOPATH="$OLDGOPATH"

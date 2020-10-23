@@ -22,9 +22,11 @@ var onuch = make(chan user)
 var offuch = make(chan user)
 
 func Start_Server() {
+	var dbready = make(chan struct{})
 	//	ws := NewWsServer()
 	db_start()
-	go online_status()
+	go online_status(dbready)
+	<-dbready
 	//	go sync_db()
 	http.HandleFunc("/", index)
 	http.HandleFunc("/index.html", index)
@@ -37,10 +39,11 @@ func Start_Server() {
 	log.Fatal(http.ListenAndServe("10.68.61.6:8000", nil))
 }
 
-func online_status() {
+func online_status(dbready chan struct{}) {
 	for id, u := range userdb {
 		chnti[u.mname] = id
 	}
+	close(dbready)
 	for {
 		select {
 		case u := <-onuch:

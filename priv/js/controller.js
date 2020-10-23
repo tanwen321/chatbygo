@@ -532,7 +532,7 @@ function onGroupListChange(groups) {
 //显示群成员
 function showGroupMember() {
     $('#group-member-layer').show();
-    var members = chatService.getGroupMembers(currentPage.currentChatGroup.uuid);
+    var members = chatService.groups[currentPage.currentChatGroup.uuid];
     $('.group-member-amount').html("成员(" + Object.keys(members).length + ')')
     let str = "";
     for (var key in members) {
