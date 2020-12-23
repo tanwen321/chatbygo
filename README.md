@@ -47,4 +47,5 @@ finished
 /api/v1/adduserfriend?friendname=admin&token=token信息  
 
 #### 5、效果图
-![Image text](https://github.com/tanwen321/chatbygo/blob/main/xiaoguo.png）
+
+![image](https://github.com/tanwen321/chatbygo/blob/main/xiaoguo.png）
