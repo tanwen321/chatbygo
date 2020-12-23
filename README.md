@@ -31,13 +31,17 @@ finished
 
 ### 4、API
 添加用户（管理员权限）
+
 /api/v1/adduser?name=iphone15&pass=test123456&nikename=我是最新的&words=没有最新，只有更新&token=token信息
 
 添加群组（管理员权限）
+
 /api/v1/addgroup?name=做工的人&word=做工的人，做不完的工&token=token信息
 
 添加当前用户到群组
+
 /api/v1/addusertogroup?groupname=做工的人&token=token信息
 
 添加好友
+
 /api/v1/adduserfriend?friendname=admin&token=token信息
