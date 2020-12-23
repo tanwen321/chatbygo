@@ -21,12 +21,12 @@ https://github.com/Unknwon/com
 go get -u giturl地址  
 
 ### 3、运行步骤
-导入数据库和实例表
-mysql_db.sql是msql数据库的实例数据
-默认的用户名和密码查看sql文件
+导入数据库和实例表  
+mysql_db.sql是msql数据库的实例数据  
+默认的用户名和密码查看sql文件  
 
-修改配置文件（主要是数据库连接信息）
-文件路径conf/app.ini
+修改配置文件（主要是数据库连接信息）  
+文件路径conf/app.ini  
 
 [@tanwendeMacBook-Air:G_work]$ cd chatbygo/  
 [@tanwendeMacBook-Air:chatbygo]$ ./install   
