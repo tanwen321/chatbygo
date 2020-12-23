@@ -28,8 +28,9 @@ var currentPage = {
 
 var lockReconnect = false;  //避免ws重复连接
 var ws = null;          // 判断当前浏览器是否支持WebSocket
-var wsUrl = "ws://" + location.host + "/mmchat_socket";
+var wsUrl = "ws://" + location.host + "/api/v1/mmchat_socket";
 var hei;
+var wstoken = ""
 var chatService;
 
 //为了避免controller层侵入到service层，用controller层的代码覆盖service层的预置方法
@@ -80,11 +81,12 @@ function login() {
         data:auth,
         url:'login.html',
         success :function(data) {
-            console.log(data);
-            if (data=="ok") {
+            // console.log(data);
+            if (data.msg=="ok") {
+                wstoken = data.data.token
                 resultStatus=true
             } else {
-                $("#login-error-msg").html(data)
+                $("#login-error-msg").html(data.msg)
             }
         },
         error :function(e) {
@@ -158,6 +160,7 @@ function renderFriendList(friends) {
         var friendAvatarImg = item.find("img");
         friendAvatarImg.attr("src", friend.avatar);
         friendAvatarImg.attr("id", "avatar_" + key);
+
         //设置好友名称
         item.find(".friend-name").html(friend.name);
         //更新未读消息数
@@ -185,9 +188,9 @@ function renderFriendList(friends) {
         //将一条好友添加到好友的列表中
         friendListDiv.append(item);
 
-        if (friend.online) {
-            $("#avatar_" + key).removeClass("friend-avatar-desaturate");
-        }
+        // if (friend.online) {
+        $("#avatar_" + key).removeClass("friend-avatar-desaturate");
+        // }
     }
     }
 }
@@ -208,11 +211,11 @@ function renderGroupList(groups) {
         //设置群id
         item.attr("id", key);
         //设置群头像
-        // var groupAvatarImg = item.find("img");
-        // groupAvatarImg.attr("src", group.avatar);
-        // groupAvatarImg.attr("id", "avatar_" + key);
+        var groupAvatarImg = item.find("img");
+        groupAvatarImg.attr("src", group.avatar);
+        groupAvatarImg.attr("id", "avatar_" + key);
         //设置群名称
-        item.find(".group-name").html(group.name);
+        item.find(".group-name").html(group.name+" (群组)");
         //更新未读消息数
         var unReadMessage = group.unReadMessage;
         item.find(".message-count").text(unReadMessage);
@@ -551,9 +554,9 @@ function hideGroupMember() {
 function createWebSocket(url) {
     try {
         if ('WebSocket' in window) {
-            ws = new WebSocket(url);
+            ws = new WebSocket(url + "?token="+ wstoken);
         } else if ('MozWebSocket' in window) {
-            ws = new MozWebSocket(url);
+            ws = new MozWebSocket(url + "?token="+ wstoken);
         } else {
             alert("您的浏览器不支持websocket协议,建议使用新版谷歌、火狐等浏览器，请勿使用IE10以下浏览器，360浏览器请使用极速模式，不要使用兼容模式！");
         }
@@ -575,6 +578,7 @@ function initEventHandle() {
         reconnect(wsUrl);
     };
     ws.onopen = function () {
+        // ws.send(wstoken)
         heartCheck.reset().start();
         console.log("llws连接成功!" + new Date().toUTCString());
     };

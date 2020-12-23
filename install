@@ -8,10 +8,12 @@ fi
 CURDIR=`pwd`
 OS=`uname -s`
 if [[ "$OS" == "Linux" ]];then
-	sed -i "s%Whome *=.*$%Whome = \"$CURDIR/priv\"%" src/gchat/gchat_db.go
+	sed -i "s%Whome *=.*$%Whome = \"$CURDIR/priv\"%" ./conf/app.ini
+	sed -i "s%Whome *=.*$%Whome = \"$CURDIR/priv\"%" ./go.mod
 fi
 if [[ "$OS" == "Darwin" ]];then
-	sed -i "" "s%Whome *=.*$%Whome = \"$CURDIR/priv\"%" src/gchat/gchat_db.go
+	sed -i "" "s%Whome *=.*$%Whome = \"$CURDIR/priv\"%" ./conf/app.ini
+	sed -i "" "s%Whome *=.*$%Whome = \"$CURDIR/priv\"%" ./go.mod
 fi
 OLDGOPATH="$GOPATH"
 export GOPATH="$CURDIR"	
@@ -19,8 +21,6 @@ export GOPATH="$CURDIR"
 gofmt -w src
 
 #go install -race test
-go install test
-
 export GOPATH="$OLDGOPATH"
 
 echo 'finished'

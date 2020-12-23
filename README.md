@@ -6,7 +6,19 @@ go语言的聊天服务器
 linux go环境或者mac go环境
 
 ### 2、依赖的go包
-websocket：https://github.com/gorilla/websocket
+websocket：ws的基础包
+https://github.com/gorilla/websocket
+Gin：Golang 的一个微框架，性能极佳。
+https://github.com/gin-gonic/gin
+beego-validation：采用的 beego 的参数验证库。
+https://github.com/astaxie/beego/tree/master/validation
+gorm，对开发人员友好的 ORM 框架（数据库连接）。
+https://github.com/jinzhu/gorm
+com，一个小而美的工具包。
+https://github.com/Unknwon/com
+
+注意：提示缺少就使用
+go get -u giturl地址
 
 ### 3、运行步骤
 [@tanwendeMacBook-Air:G_work]$ cd chatbygo/ 
@@ -15,5 +27,17 @@ websocket：https://github.com/gorilla/websocket
 
 finished 
 
-[@tanwendeMacBook-Air:chatbygo]$ ./bin/test 
+[@tanwendeMacBook-Air:chatbygo]$ go run main.go
 
+### 4、API
+添加用户（管理员权限）
+/api/v1/adduser?name=iphone15&pass=test123456&nikename=我是最新的&words=没有最新，只有更新&token=token信息
+
+添加群组（管理员权限）
+/api/v1/addgroup?name=做工的人&word=做工的人，做不完的工&token=token信息
+
+添加当前用户到群组
+/api/v1/addusertogroup?groupname=做工的人&token=token信息
+
+添加好友
+/api/v1/adduserfriend?friendname=admin&token=token信息
