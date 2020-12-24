@@ -48,5 +48,7 @@ finished
 
 #### 5、效果图
 
-![image](https://github.com/tanwen321/chatbygo/blob/main/xiaoguo.png)
+![xiaoguo2.png](https://i.loli.net/2020/12/24/gkOrV5vBRlfGj3F.png)
+
+![xiaoguo.png](https://i.loli.net/2020/12/24/6QMipEbd8RN7wOL.png)
 
